@@ -1,6 +1,3 @@
-$(document).ready(function () {
-
-
     var topics = [
       "junkanoo",
       "lions",
@@ -103,28 +100,66 @@ $(document).ready(function () {
           
         });
     });
+
     // Might need to be $(document).on("click", ".add-Btn2", function () {...})
     $(document).on("click", ".add-btn2", function () {
       
 
       //Establish a variable that will our input
 
-      var newsearch = $(".add-btn").val().trim();
+      var add1 = $(".add-btn").val().trim();
+
+      var newsearch = $('<input/>').attr({
+        type: 'button',
+        value: add1,
+        class: "button btn btn-primary"
+    });
 
       console.log(newsearch);
 
-      var newButton = [newsearch];
-
-          
-
-  
       $("#topic-btn1").append(newsearch);
-  
-      // Don't need anything below here 
-      // Use Array.push to add the newsearch variable to your array of buttons 
-      // Run renderButtons() function above
       
-      });
+      var queryURL =
+        "https://api.giphy.com/v1/gifs/search?q=" +
+        add1 +
+        "&api_key=dc6zaTOxFJmzC&limit=10";
   
+      // Performing an AJAX request with the queryURL
+      $.ajax({
+          url: queryURL,
+          method: "GET"
+        })
+        // After data comes back from the request
+        .then(function (response) {
+          //console.log(queryURL);
   
-  })
+          //console.log(response);
+          // storing the data from the AJAX request in the results variable
+          var results = response.data;
+  
+          // Looping through each result item
+          for (var i = 0; i < results.length; i++) {
+            // Creating and storing a div tag
+            var topicsDiv = $("<div>");
+            topicsDiv.addClass('sticker');
+  
+            // Creating a paragraph tag with the result item's rating
+            var p = $("<p>").text("Rating: " + results[i].rating);
+  
+            // Creating and storing an image tag
+            var topicsImage = $("<img>");
+            // Setting the src attribute of the image to a property pulled off the result item
+            topicsImage.attr("src", results[i].images.fixed_height.url);
+  
+            // Appending the paragraph and image tag to the topicsDiv
+            topicsDiv.append(p);
+            topicsDiv.append(topicsImage);
+  
+            // Prependng the topicsDiv to the HTML page in the "#gifs-appear-here" div
+            $("#gifs-appear-here").append(topicsDiv);
+          }
+        });
+    });
+      
+      
+  
