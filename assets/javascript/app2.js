@@ -93,9 +93,10 @@
             // Appending the paragraph and image tag to the topicsDiv
             topicsDiv.append(p);
             topicsDiv.append(topicsImage);
-  
+
+            //$("#gifs-appear-here");
             // Prependng the topicsDiv to the HTML page in the "#gifs-appear-here" div
-            $("#gifs-appear-here").append(topicsDiv);
+            $("#gifs-appear-here").prepend(topicsDiv);
           }
           
         });
