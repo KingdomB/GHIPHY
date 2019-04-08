@@ -25,7 +25,7 @@ var topics = [
 var addTopics = [];
 
 for (var i = 0; i < topics.length; i++) {
-  $(".btn-primary").button();
+  $(".topic-btn1").button();
 
   // MAYBE .button(topics[i]) OR append(topics[i])
 }

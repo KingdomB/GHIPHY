@@ -1,0 +1,13 @@
+.sticker {
+    display: inline-block;
+    margin: 5px
+}
+
+.button {
+    margin: 5px;
+}
+
+#topic-btn2 {
+    float: right;
+    margin-right: 20px;
+}
